@@ -5,6 +5,7 @@ namespace App\Models\Feature;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Mitra extends Model
 {
@@ -42,6 +43,12 @@ class Mitra extends Model
 
     public function getLogoPathAttribute()
     {
-        return asset('storage/' . $this->logo);
+        if (!$this->logo) {
+            return asset('default/null/notfound.png');
+        }
+        if (preg_match('/^https?:\/\//i', $this->logo)) {
+            return $this->logo;
+        }
+        return Storage::url($this->logo);
     }
 }

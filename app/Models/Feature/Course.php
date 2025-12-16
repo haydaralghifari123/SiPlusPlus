@@ -5,6 +5,7 @@ namespace App\Models\Feature;
 use App\Models\Master\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Course extends Model
 {
@@ -60,7 +61,15 @@ class Course extends Model
 
     public function getImagePathAttribute()
     {
-        return asset('storage/' . $this->image);
+        if (!$this->image) {
+            return asset('default/null/notfound.png');
+        }
+        // Jika sudah URL absolut, kembalikan apa adanya
+        if (preg_match('/^https?:\/\//i', $this->image)) {
+            return $this->image;
+        }
+        // Gunakan Storage::url agar mengikuti konfigurasi disk/public & APP_URL/ASSET_URL
+        return Storage::url($this->image);
     }
 
     public function getPriceRupiahAttribute()
