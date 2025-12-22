@@ -7,12 +7,6 @@
 <p align="center">Dibuat Menggunakan Framework Laravel Versi 9.</p>
 <div align="center">
 
-[![All Contributors](https://img.shields.io/github/contributors/fikrisuheri/laravel-toko-online-anime-store)](https://github.com/fikrisuheri/laravel-e-course-app/graphs/contributors)
-![GitHub last commit](https://img.shields.io/github/last-commit/fikrisuheri/laravel-e-course-app.svg)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/fikrisuheri/laravel-e-course-app)
-</div>
-
-## DIMOHON UNTUK TIDAK DIPERJUALBELIKAN !
 
 ## Fitur apa saja yang tersedia di Aplikasi Ecourse Laravel?
 
