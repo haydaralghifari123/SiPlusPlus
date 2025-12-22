@@ -5,8 +5,6 @@
 
 
 <p align="center">Dibuat Menggunakan Framework Laravel Versi 9.</p>
-<div align="center">
-
 
 ## Fitur apa saja yang tersedia di Aplikasi Ecourse Laravel?
 
