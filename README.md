@@ -1,4 +1,4 @@
-<h1 align="center">Selamat datang di Aplikasi Ecourse Laravel! 👋</h1>
+<h1 align="center">Selamat datang !</h1>
 <img src="https://user-images.githubusercontent.com/61069138/197397140-0cb2cef9-4e47-4589-b90d-2d6c0adc399e.png" />
 
 
@@ -10,7 +10,7 @@
 
 - TERINTEGRASI DENGAN PAYMENT GATEWAY MIDTRANS
 - BISA JADI MITRA DAN MEMBUAT COURSE SENDIRI
-- MENGGUNAKAN YAJRADATATABLE SERVICE
+- MENGGUNAKAN SERVICE
 - Dan lain-lain
 
 
@@ -26,7 +26,7 @@ AKUN ADMIN
 1. **Clone Repository**
 
 ```bash
-git clone https://github.com/fikrisuheri/laravel-e-course-app.git
+git clone 
 cd laravel-e-course-app
 composer install
 cp .env.example .env
