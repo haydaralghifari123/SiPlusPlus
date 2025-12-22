@@ -74,22 +74,3 @@ php artisan serve
 ```
 
 
-## Contributing
-APlikasi Ini belum beres sepenuhnya, silahkan jika ingin menambah fitur atau memperbaiki bug pada aplikasi ini.
-
-
-## Author
-
-- Facebook : <a href="https://web.facebook.com/ahmad.ari.9847/"> FIKRI SUHERI</a>
-- INSTAGRAM : <a href="https://www.instagram.com/fikrisuheri__"> FIKRI SUHERI</a>
-- Terima Jasa Pembuatan Aplikasi Web Bisa Hubungi Kontak Diatas Atau Whatsapp Ke 081222627526
-## Donation
-
-You can support Me On [Saweria](https://saweria.co/fikrisuheri) Or [Traktee](https://trakteer.id/fikri-suheri)
-
-## Preview
-
-![4](https://user-images.githubusercontent.com/61069138/197397134-47790039-e806-41e7-9b89-34da5a61e695.png)
-![Screenshot 2022-10-23 210908](https://user-images.githubusercontent.com/61069138/197397140-0cb2cef9-4e47-4589-b90d-2d6c0adc399e.png)
-![2](https://user-images.githubusercontent.com/61069138/197397142-72a309b1-3068-4ed0-9f60-c0b446a5170c.png)
-![3](https://user-images.githubusercontent.com/61069138/197397144-51715b31-3fe7-4e6d-ac7c-6048a36698f2.png)
