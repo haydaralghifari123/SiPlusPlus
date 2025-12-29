@@ -134,14 +134,17 @@ Route::name('frontend.')->group(function(){
 
         });
     
-        Route::middleware('role:mitra')->prefix('mitra')->name('mitra.')->group(function(){
-    
+        // Pendaftaran Mitra untuk user login (role: user atau mitra)
+        Route::prefix('mitra')->name('mitra.')->group(function(){
             Route::prefix('register')->name('register.')->group(function(){
-    
                 Route::get('/',[RegistermitraController::class,'register'])->name('index');
                 Route::post('/store',[RegistermitraController::class,'store'])->name('store');
-    
             });
+        });
+
+        Route::middleware('role:mitra')->prefix('mitra')->name('mitra.')->group(function(){
+    
+            
     
             Route::prefix('course')->name('course.')->group(function(){
     

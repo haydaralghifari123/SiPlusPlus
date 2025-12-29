@@ -28,10 +28,17 @@
                     Lihat Kursus
                 </a>
 
-                <a href="#" 
-                   class="px-6 py-3 bg-transparent border border-white font-semibold rounded hover:bg-white hover:text-[#0B2447] transition">
-                    Daftar Mentor
-                </a>
+                @auth
+                    <a href="{{ route('frontend.mitra.register.index') }}" 
+                       class="px-6 py-3 bg-transparent border border-white font-semibold rounded hover:bg-white hover:text-[#0B2447] transition">
+                        Daftar Mentor
+                    </a>
+                @else
+                    <a href="{{ route('register') }}" 
+                       class="px-6 py-3 bg-transparent border border-white font-semibold rounded hover:bg-white hover:text-[#0B2447] transition">
+                        Daftar Mentor
+                    </a>
+                @endauth
             </div>
         </div>
 
