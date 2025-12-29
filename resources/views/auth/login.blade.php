@@ -10,7 +10,7 @@
 
         <h1 class="text-3xl font-bold text-center text-[#0A1A33] leading-tight">
             Akses Kursus <br>
-            Coding SiPluPlus <br>
+            Coding SiPluPlus gue<br>
             dan Mulai Belajar Sekarang
         </h1>
 
