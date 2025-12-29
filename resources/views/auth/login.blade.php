@@ -2,91 +2,97 @@
 
 @section('content')
 
-<div class="min-h-screen flex">
-    
-    {{-- LEFT PANEL --}}
-    <div class="hidden lg:flex w-1/3 bg-[#CFE3FF] flex-col justify-center items-center px-10">
-        <img src="{{ asset('mazer/assets/images/logo/logo.png') }}" alt="Logo" class="w-40 mb-8">
+<div class="min-h-screen flex bg-white">
 
-        <h1 class="text-3xl font-bold text-center text-[#0A1A33] leading-tight">
-            Akses Kursus <br>
-            Coding SiPluPlus gue<br>
-            dan Mulai Belajar Sekarang
+    {{-- LEFT PANEL --}}
+    <div class="hidden lg:flex w-1/2 bg-[#EAF2FF] flex-col justify-center items-center px-16">
+        <img src="{{ asset('mazer/assets/images/logo/logo.png') }}" alt="Logo" class="w-40 mb-10">
+
+        <h1 class="text-4xl font-bold text-center text-[#0A1A33] leading-tight">
+            Akses Kursus Coding <br>
+            SiPlusPlus dan Mulai <br>
+            Belajar Sekarang
         </h1>
 
-        <p class="text-center text-[#0A1A33] mt-4 px-4 text-sm">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod tempor incididunt.
+        <p class="text-center text-[#0A1A33] mt-6 px-6 text-sm max-w-md">
+            Platform belajar online untuk mengasah kemampuan coding dan
+            mempersiapkan karir di bidang teknologi.
         </p>
     </div>
 
-    {{-- RIGHT PANEL --}}
-    <div class="flex-1 bg-[#F6F6FA] flex items-center justify-center px-6">
-        <div class="w-full max-w-md">
+    {{-- RIGHT SIDE (WHITE BACKGROUND) --}}
+    <div class="w-full lg:w-1/2 bg-white flex items-center justify-center">
 
-            {{-- Title --}}
-            <h2 class="text-center text-2xl font-bold text-gray-800 mb-1">
+        {{-- FLOATING LOGIN CARD --}}
+        <div class="w-full max-w-lg bg-white shadow-[0_30px_60px_rgba(0,0,0,0.25)] px-10 py-14 rounded-sm">
+
+            {{-- TITLE --}}
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-1">
                 LOGIN ADMIN
             </h2>
-            <p class="text-center text-gray-500 mb-8 text-sm">
+            <p class="text-center text-gray-500 text-sm">
                 LOG IN TO CONTINUE
             </p>
+
+            {{-- DIVIDER --}}
+            <div class="w-full h-px bg-gray-300 my-8"></div>
 
             {{-- LOGIN FORM --}}
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
-                {{-- Email --}}
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1">Username</label>
-                    <div class="flex items-center border border-gray-300 bg-white rounded-md px-3">
-                        <i class="bi bi-envelope text-gray-500 mr-2"></i>
-                        <input 
-                            type="text" 
+                {{-- USERNAME --}}
+                <div class="mb-8">
+                    <label class="block text-sm font-medium mb-2 text-gray-700">
+                        Username
+                    </label>
+                    <div class="flex items-center border border-gray-300 px-4 py-3">
+                        <i class="bi bi-envelope text-gray-500 mr-3"></i>
+                        <input
+                            type="text"
                             name="email"
-                            class="w-full py-3 outline-none text-gray-700"
-                            placeholder="Username"
+                            class="w-full outline-none text-gray-700 bg-transparent"
+                            placeholder="Masukkan username"
                         >
                     </div>
                 </div>
 
-                {{-- Password --}}
-                <div class="mb-6">
-                    <label class="block text-sm font-medium mb-1">Password</label>
-                    <div class="flex items-center border border-gray-300 bg-white rounded-md px-3">
-                        <i class="bi bi-lock text-gray-500 mr-2"></i>
-                        <input 
-                            type="password" 
+                {{-- PASSWORD --}}
+                <div class="mb-10">
+                    <label class="block text-sm font-medium mb-2 text-gray-700">
+                        Password
+                    </label>
+                    <div class="flex items-center border border-gray-300 px-4 py-3">
+                        <i class="bi bi-lock text-gray-500 mr-3"></i>
+                        <input
+                            type="password"
                             name="password"
-                            class="w-full py-3 outline-none text-gray-700"
-                            placeholder="**********"
+                            class="w-full outline-none text-gray-700 bg-transparent"
+                            placeholder="********"
                         >
+                        <span class="text-xs text-gray-400 ml-2 cursor-pointer">
+                            SHOW
+                        </span>
                     </div>
                 </div>
 
-                {{-- Login Button --}}
-                <button 
-                    type="submit" 
-                    class="w-full bg-[#1D1D3F] hover:bg-[#141430] transition text-white py-3 rounded-md font-semibold flex items-center justify-center gap-2"
+                {{-- LOGIN BUTTON --}}
+                <button
+                    type="submit"
+                    class="w-full bg-[#1D1D3F] hover:bg-[#141430] transition
+                           text-white py-4 font-semibold flex items-center justify-between px-6"
                 >
-                    Login
-                    <i class="bi bi-arrow-right"></i>
+                    <span>Login</span>
+                    <i class="bi bi-arrow-right text-lg"></i>
                 </button>
-
             </form>
 
-            {{-- FOOTER LINKS --}}
-            <div class="text-center mt-8">
-                <a href="{{ route('password.request') }}" class="text-gray-500 text-sm hover:underline">
+            {{-- FOOTER --}}
+            <div class="text-center mt-10">
+                <a href="{{ route('password.request') }}"
+                   class="text-gray-500 text-sm hover:underline">
                     Lupa Password?
                 </a>
-
-                <p class="text-gray-600 mt-4 text-sm">
-                    Belum punya akun?
-                    <a href="{{ route('register') }}" class="text-[#1D1D3F] font-bold hover:underline">
-                        Daftar Sekarang
-                    </a>
-                </p>
             </div>
 
         </div>

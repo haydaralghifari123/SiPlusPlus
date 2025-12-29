@@ -12,9 +12,8 @@
 
     <title>{{ $title ?? 'Auth' }}</title>
 </head>
-<body class="min-h-screen bg-gray-100">
-
+<body class="min-h-screen bg-white">
     @yield('content')
-
 </body>
+
 </html>
