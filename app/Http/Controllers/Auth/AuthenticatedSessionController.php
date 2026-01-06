@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,15 +27,25 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+        // Authenticate user
         $request->authenticate();
 
+        // Regenerate session to prevent session fixation
         $request->session()->regenerate();
 
-        if(auth()->user()->role_name == 'admin'){
+        $user = auth()->user();
+
+        // Redirect berdasarkan role
+        if ($user->hasRole('admin')) {
             return redirect()->route('backend.dashboard');
-        }else{
-            return redirect()->route('frontend.user.dashboard');
         }
+
+        if ($user->hasRole('mitra')) {
+            return redirect()->route('mitra.dashboard');
+        }
+
+        // Default: user biasa
+        return redirect()->route('user.dashboard');
     }
 
     /**
@@ -50,7 +59,6 @@ class AuthenticatedSessionController extends Controller
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/');
