@@ -26,27 +26,25 @@ class AuthenticatedSessionController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(LoginRequest $request)
-    {
-        // Authenticate user
-        $request->authenticate();
+{
+    $request->authenticate();
+    $request->session()->regenerate();
 
-        // Regenerate session to prevent session fixation
-        $request->session()->regenerate();
+    $user = auth()->user();
 
-        $user = auth()->user();
-
-        // Redirect berdasarkan role
-        if ($user->hasRole('admin')) {
-            return redirect()->route('backend.dashboard');
-        }
-
-        if ($user->hasRole('mitra')) {
-            return redirect()->route('mitra.dashboard');
-        }
-
-        // Default: user biasa
-        return redirect()->route('user.dashboard');
+    // AMAN: pakai Spatie Permission
+    if ($user->hasRole('admin')) {
+        return redirect()->route('backend.dashboard');
     }
+
+    if ($user->hasRole('mitra')) {
+        return redirect()->route('mitra.dashboard');
+    }
+
+    // default user biasa
+    return redirect()->route('frontend.user.dashboard');
+}
+
 
     /**
      * Destroy an authenticated session.
