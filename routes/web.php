@@ -227,10 +227,12 @@ Route::post('/mitra/register', [RegistermitraController::class, 'store'])
 | FRONTEND MITRA ALIAS (UNTUK TEMPLATE LAMA)
 |--------------------------------------------------------------------------
 */
-
+Route::middleware(['auth', 'role:mitra'])->prefix('mitra')->group(function () {
 // dashboard mitra
-Route::get('/mitra/dashboard', [CoursemitraController::class, 'index'])
-    ->name('frontend.mitra.dashboard');
+Route::middleware(['auth', 'role:mitra'])->prefix('mitra')->group(function () {
+    Route::get('/dashboard', [MitraDashboardController::class, 'index'])
+        ->name('frontend.mitra.dashboard');
+});
 
 // mitra course
 Route::get('/mitra/course', [CoursemitraController::class, 'index'])
@@ -261,6 +263,8 @@ Route::get('/mitra/wallet', [WalletController::class, 'index'])
 
 Route::post('/mitra/wallet/withdraw', [WalletController::class, 'withdraw'])
     ->name('frontend.mitra.wallet.withdraw');
+
+    });
 
 Route::get('/info', function () {
     return view('frontend.info');

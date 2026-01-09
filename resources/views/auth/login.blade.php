@@ -28,7 +28,7 @@
 
             {{-- TITLE --}}
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-1">
-                LOGIN ADMIN
+                LOGIN
             </h2>
             <p class="text-center text-gray-500 text-sm">
                 LOG IN TO CONTINUE
