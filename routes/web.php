@@ -270,5 +270,15 @@ Route::get('/info', function () {
     return view('frontend.info');
 })->name('frontend.info');
 
+/*
+|--------------------------------------------------------------------------
+| MIDTRANS CALLBACK (PAYMENT NOTIFICATION)
+|--------------------------------------------------------------------------
+*/
+use App\Http\Controllers\MidtransCallbackController;
+
+Route::post('/midtrans/callback', [MidtransCallbackController::class, 'handle'])
+    ->name('midtrans.callback');
+
 
 require __DIR__.'/auth.php';
