@@ -12,7 +12,8 @@ class MidtransCallbackController extends Controller
     {
         Log::info('MIDTRANS CALLBACK', $request->all());
 
-        $serverKey = config('midtrans.server_key');
+        // ✅ BENAR
+        $serverKey = config('services.midtrans.server_key');
 
         $signatureKey = hash(
             'sha512',
@@ -27,19 +28,22 @@ class MidtransCallbackController extends Controller
             return response()->json(['message' => 'Invalid signature'], 403);
         }
 
-        $transaction = Transaction::where('invoice', $request->order_id)->first();
+        // ✅ BENAR (invoice_number)
+        $transaction = Transaction::where('invoice_number', $request->order_id)->first();
 
         if (!$transaction) {
             Log::warning('TRANSACTION NOT FOUND', ['order_id' => $request->order_id]);
-            return response()->json(['message' => 'Transaction not found']);
+            return response()->json(['message' => 'Transaction not found'], 404);
         }
 
+        // ✅ STATUS SESUAI DB (INT)
         if (in_array($request->transaction_status, ['capture', 'settlement'])) {
-            $transaction->status = 'paid';
+            $transaction->status = 1;
+            $transaction->pay_at = now();
         } elseif ($request->transaction_status === 'pending') {
-            $transaction->status = 'pending';
+            $transaction->status = 0;
         } else {
-            $transaction->status = 'failed';
+            $transaction->status = 2; // failed / expired
         }
 
         $transaction->save();
