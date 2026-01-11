@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Transaction;
+use App\Models\Feature\Transaction;
 use App\Models\Feature\UserCourse;
 use Illuminate\Support\Facades\Log;
 
