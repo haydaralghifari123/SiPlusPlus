@@ -1,193 +1,251 @@
 @extends('layouts.frontend.app')
 
-{{-- =========================
-|  NAVBAR LOKAL (KHUSUS PAGE INI)
-|  TIDAK TERGANTUNG NAVBAR GLOBAL
-========================= --}}
-@section('navbar')
-<nav class="w-full bg-white border-b shadow-sm">
-    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-
-        {{-- LOGO --}}
-        <a href="/" class="flex items-center gap-2">
-            <img src="{{ asset('mazer/assets/images/logo/logo.png') }}" class="h-8">
-        </a>
-
-        {{-- MENU --}}
-        <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
-            <a href="/" class="hover:text-blue-700">Beranda</a>
-            <a href="/#kursus" class="hover:text-blue-700">Kursus</a>
-            <a href="/info" class="hover:text-blue-700">Info</a>
-        </div>
-
-        {{-- ACTION --}}
-        <div>
-            @auth
-                <a href="{{ route('frontend.user.dashboard') }}"
-                   class="px-4 py-2 bg-blue-700 text-white rounded text-sm">
-                    Dashboard
-                </a>
-            @else
-                <a href="{{ route('login') }}" class="text-sm hover:underline">
-                    Login
-                </a>
-            @endauth
-        </div>
-
-    </div>
-</nav>
-@endsection
-
-{{-- =========================
-|  CONTENT
-========================= --}}
 @section('content')
-<div class="container my-5">
 
-    {{-- BREADCRUMB (AMAN, TANPA ROUTE FIKTIF) --}}
-    <nav class="mb-4 text-muted text-sm">
-        <a href="/" class="text-decoration-none">Beranda</a>
-        &nbsp;›&nbsp;
-        <a href="/#kursus" class="text-decoration-none">Kursus</a>
-        &nbsp;›&nbsp;
-        <strong>{{ $data['course']['name'] }}</strong>
-    </nav>
+<style>
+/* ================= RESET RINGAN ================= */
+.course-wrapper * {
+    box-sizing: border-box;
+    font-family: Inter, Arial, sans-serif;
+}
 
-    <div class="row g-4">
+.course-wrapper {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
 
-        {{-- LEFT CONTENT --}}
-        <div class="col-lg-8 col-md-7">
+/* ================= BREADCRUMB ================= */
+.breadcrumb {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
 
-            {{-- VIDEO --}}
-            <div class="card mb-4 shadow-sm">
+/* ================= LAYOUT ================= */
+.course-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 900px) {
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ================= VIDEO ================= */
+.video-box iframe {
+    width: 100%;
+    height: 420px;
+    border-radius: 10px;
+    border: none;
+}
+
+/* ================= TITLE ================= */
+.course-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 15px 0 5px;
+}
+
+.course-desc {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* ================= STATS ================= */
+.course-stats {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.course-stats div {
+    text-align: center;
+    color: #444;
+}
+
+/* ================= TABS ================= */
+.tabs {
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.tab {
+    padding: 10px 0;
+    cursor: pointer;
+    font-weight: 600;
+    color: #555;
+}
+
+.tab.active {
+    color: #1e40af;
+    border-bottom: 2px solid #1e40af;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ================= MATERI ================= */
+.materi-item {
+    padding: 10px 15px;
+    background: #f3f4f6;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    position: sticky;
+    top: 80px;
+}
+
+.sidebar h3 {
+    margin-bottom: 15px;
+}
+
+.sidebar-info {
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.price {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1e40af;
+    margin: 20px 0;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background: #1e40af;
+    color: white;
+}
+
+.btn-success {
+    background: #16a34a;
+    color: white;
+}
+</style>
+
+<div class="course-wrapper">
+
+    <div class="breadcrumb">
+        Beranda › Kursus › <strong>{{ $data['course']['name'] }}</strong>
+    </div>
+
+    <div class="course-grid">
+
+        {{-- ================= LEFT ================= --}}
+        <div>
+
+            <div class="video-box">
                 <iframe
-                    class="w-100 rounded-top"
-                    height="420"
                     src="https://www.youtube.com/embed/{{ $data['course']['detail'][0]['link'] }}"
                     allowfullscreen>
                 </iframe>
             </div>
 
-            {{-- TITLE --}}
-            <h1 class="fw-bold mb-2">{{ $data['course']['name'] }}</h1>
+            <div class="course-title">{{ $data['course']['name'] }}</div>
 
-            <p class="text-muted mb-4">
+            <div class="course-desc">
                 {{ $data['course']['short_description'] ?? 'Pelajari materi secara bertahap dan terstruktur.' }}
-            </p>
+            </div>
 
-            {{-- INFO --}}
-            <div class="row text-center mb-4">
-                <div class="col-4">
-                    ⭐⭐⭐⭐☆
-                    <div class="small text-muted">4.0 / 5.0</div>
-                </div>
-                <div class="col-4">
-                    👥
-                    <div class="small text-muted">100 Peserta</div>
-                </div>
-                <div class="col-4">
-                    📈
-                    <div class="small text-muted">Pemula</div>
-                </div>
+            <div class="course-stats">
+                <div>⭐ 4.0 / 5.0</div>
+                <div>👥 100 Peserta</div>
+                <div>📘 Pemula</div>
             </div>
 
             {{-- TABS --}}
-            <ul class="nav nav-tabs mb-3">
-                <li class="nav-item">
-                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#description">
-                        Deskripsi
-                    </button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#materi">
-                        Materi
-                    </button>
-                </li>
-            </ul>
+            <div class="tabs">
+                <div class="tab active" onclick="openTab('desc')">Deskripsi</div>
+                <div class="tab" onclick="openTab('materi')">Materi</div>
+            </div>
 
-            <div class="tab-content border rounded p-4 bg-white">
-                <div class="tab-pane fade show active" id="description">
-                    {!! $data['course']['description'] !!}
-                </div>
+            <div id="desc" class="tab-content active">
+                {!! $data['course']['description'] !!}
+            </div>
 
-                <div class="tab-pane fade" id="materi">
-                    <h6 class="mb-3">
-                        {{ $data['course']['total_video'] }}
-                        ({{ $data['course']['total_duration'] }})
-                    </h6>
-
-                    @foreach ($data['course']['detail'] as $detail)
-                        <div class="alert alert-secondary mb-2">
-                            ▶ {{ $detail->number }}. {{ $detail->name }}
-                        </div>
-                    @endforeach
-                </div>
+            <div id="materi" class="tab-content">
+                @foreach ($data['course']['detail'] as $detail)
+                    <div class="materi-item">
+                        ▶ {{ $detail->number }}. {{ $detail->name }}
+                    </div>
+                @endforeach
             </div>
 
         </div>
 
-        {{-- RIGHT SIDEBAR --}}
-        <div class="col-lg-4 col-md-5">
-            <div class="card shadow-sm sticky-top" style="top: 90px">
-                <div class="card-body">
+        {{-- ================= RIGHT ================= --}}
+        <div class="sidebar">
 
-                    <h4 class="fw-bold mb-3">Daftar Sekarang</h4>
+            <h3>Informasi Kursus</h3>
 
-                    <div class="mb-3">
-                        ⏱ <strong>Durasi</strong><br>
-                        <small class="text-muted">{{ $data['course']['total_duration'] }}</small>
-                    </div>
+            <div class="sidebar-info">⏱ {{ $data['course']['total_duration'] }}</div>
+            <div class="sidebar-info">🎓 Sertifikat tersedia</div>
+            <div class="sidebar-info">🎥 Video pembelajaran</div>
 
-                    <div class="mb-3">
-                        🎓 <strong>Sertifikat</strong><br>
-                        <small class="text-muted">Sertifikat penyelesaian</small>
-                    </div>
+            <div class="price">
+                {{ $data['course']['price_rupiah'] }}
+            </div>
 
-                    <div class="mb-3">
-                        🎥 <strong>Format</strong><br>
-                        <small class="text-muted">Video, kuis, dan proyek akhir</small>
-                    </div>
+            @auth
+                @php
+                    $userCourse = auth()->user()->UserCourse()->pluck('course_id')->toArray();
+                @endphp
 
-                    <hr>
-
-                    <h3 class="fw-bold text-primary mb-4">
-                        {{ $data['course']['price_rupiah'] }}
-                    </h3>
-
-                    {{-- FORM TRANSAKSI (LOGIC ASLI TETAP) --}}
+                @if (!in_array($data['course']['id'], $userCourse))
                     <form action="{{ route('user.transaction.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="course_id" value="{{ $data['course']['id'] }}">
-
-                        @auth
-                            @php
-                                $userCourse = auth()->user()
-                                    ->UserCourse()
-                                    ->pluck('course_id')
-                                    ->toArray();
-                            @endphp
-
-                            @if (!in_array($data['course']['id'], $userCourse))
-                                <button type="submit" class="btn btn-primary w-100 py-3 fw-semibold">
-                                    Beli Sekarang
-                                </button>
-                            @else
-                                <a href="{{ route('frontend.user.course.index') }}"
-                                   class="btn btn-success w-100 py-3 fw-semibold">
-                                    Lanjutkan Belajar
-                                </a>
-                            @endif
-                        @else
-                            <button type="submit" class="btn btn-primary w-100 py-3 fw-semibold">
-                                Beli Sekarang
-                            </button>
-                        @endauth
+                        <button class="btn btn-primary">Beli Sekarang</button>
                     </form>
+                @else
+                    <a href="{{ route('frontend.user.course.index') }}" class="btn btn-success">
+                        Lanjutkan Belajar
+                    </a>
+                @endif
+            @else
+                <a href="{{ route('login') }}" class="btn btn-primary">Login untuk Beli</a>
+            @endauth
 
-                </div>
-            </div>
         </div>
-
     </div>
 </div>
+
+<script>
+function openTab(id) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+    event.target.classList.add('active');
+    document.getElementById(id).classList.add('active');
+}
+</script>
+
 @endsection

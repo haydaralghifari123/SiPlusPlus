@@ -89,9 +89,9 @@
 
             {{-- FOOTER --}}
             <div class="text-center mt-10">
-                <a href="{{ route('password.request') }}"
+                <a href="{{ route('register') }}"
                    class="text-gray-500 text-sm hover:underline">
-                    Lupa Password?
+                    Belum Punya Akun? Register
                 </a>
             </div>
 
