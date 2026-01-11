@@ -1,41 +1,25 @@
 <div id="sidebar" class="active">
     <div class="sidebar-wrapper active">
 
-        {{-- HEADER SIDEBAR --}}
-        <div class="sidebar-header position-relative">
+        {{-- ================= LOGO (STYLE SAMA SEPERTI USER) ================= --}}
+        <div class="sidebar-header text-center py-3">
+            <a href="{{ route('backend.dashboard') }}" class="d-inline-block">
+                <img
+                    src="{{ asset('mazer/assets/images/logo/logo.png') }}"
+                    alt="SIPLUSPLUS"
+                    style="height:120px; object-fit:contain;"
+                >
+            </a>
 
-    <div class="text-center py-3">
-
-        {{-- LOGO FIX (TIDAK GEPENG) --}}
-        <a href="{{ route('backend.dashboard') }}">
-            <img src="{{ asset('mazer/assets/images/logo/logo.png') }}"
-                 alt="Logo"
-                 style="height: 55px; object-fit: contain;">
-        </a>
-
-        {{-- TEXT BRAND KECIL DAN RAPI --}}
-        <div class="mt-2">
-            <span style="font-size: 14px; font-weight: 700; letter-spacing: 1px; display:block;">
-                SIPLUSPLUS
-            </span>
-            <span style="font-size: 11px; color:#666; letter-spacing: 1px; display:block; margin-top: -2px;">
-                CODING COURSE
-            </span>
+            
         </div>
 
-    </div>
+        {{-- ================= ADMIN INFO ================= --}}
+        <div class="px-3 mb-3 text-center">
+            <strong>Halo, {{ auth()->user()->name }}!</strong>
+        </div>
 
-    {{-- HAPUS THEME TOGGLE & ICON --}}
-    <div class="sidebar-toggler x text-center">
-        <a href="#" class="sidebar-hide d-xl-none d-block">
-            <i class="bi bi-x bi-middle"></i>
-        </a>
-    </div>
-
-</div>
-
-
-        {{-- MENU SIDEBAR --}}
+        {{-- ================= MENU ================= --}}
         <div class="sidebar-menu">
             <ul class="menu">
 
@@ -43,39 +27,33 @@
 
                 {{-- DASHBOARD --}}
                 <li class="sidebar-item">
-                    <a href="{{ route('backend.dashboard') }}" class='sidebar-link'>
+                    <a href="{{ route('backend.dashboard') }}" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
-                {{-- MASTER SIDEBAR (DROPDOWN) --}}
+                {{-- MASTER --}}
                 @include('layouts.backend.data.master-sidebar')
 
-                {{-- FEATURE SIDEBAR (DROPDOWN) --}}
+                {{-- FEATURE --}}
                 @include('layouts.backend.data.feature-sidebar')
 
-                {{-- CONFIG --}}
+                {{-- ================= LOGOUT (STYLE SAMA USER) ================= --}}
                 <li class="sidebar-item">
-                    <a href="{{ route('backend.config.index') }}" class='sidebar-link'>
-                        <i class="bi bi-gear"></i>
-                        <span>Config</span>
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                       class="sidebar-link text-danger">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Logout</span>
                     </a>
                 </li>
 
             </ul>
         </div>
-
-
-        {{-- TOMBOL LOGOUT DI BAGIAN PALING BAWAH --}}
-        <div class="p-3" style="position: absolute; bottom: 10px; left: 0; width: 100%;">
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button class="btn btn-danger w-100 d-flex align-items-center justify-content-center">
-                    <i class="bi bi-box-arrow-left me-2"></i> Logout
-                </button>
-            </form>
-        </div>
-
     </div>
 </div>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    @csrf
+</form>
