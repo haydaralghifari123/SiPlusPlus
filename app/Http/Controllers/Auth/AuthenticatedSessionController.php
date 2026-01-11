@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         // MITRA
         if ($user->hasRole('mitra')) {
-            return redirect()->route('mitra.dashboard');
+            return redirect()->route('frontend.mitra.dashboard');
         }
 
         // USER BIASA
