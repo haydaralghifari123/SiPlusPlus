@@ -28,18 +28,39 @@ class UsercourseController extends Controller
         }
     }
 
-    public function learn($id,$progress)
-    {
-        try {
-            $data['userCourse'] = $this->userCourse->find($id);
-            $data['current_course'] = $this->courseDetail->Query()->where(['number' => $progress,'course_id' => $data['userCourse']['course_id']])->first();
-            if($progress > $data['userCourse']['progress'] && $progress <= $data['userCourse']['course']['total_item']){
-                $data['userCourse']['progress'] = $progress;
-                $data['userCourse']->save();
-            }
-            return view('user.course.learn',compact('data'));
-        }catch (\Throwable $th) {
-            return view('error.index',['message' => $th->getMessage()]);
+    public function learn($id, $progress)
+{
+    try {
+        $userCourse = $this->userCourse->find($id);
+
+        if (!$userCourse) {
+            abort(404, 'User course not found');
         }
+
+        $current_course = $this->courseDetail
+            ->Query()
+            ->where('course_id', $userCourse->course_id)
+            ->where('number', $progress)
+            ->first();
+
+        if (!$current_course) {
+            abort(404, 'Course material not found');
+        }
+
+        // update progress jika maju
+        if ($progress > $userCourse->progress && $progress <= $userCourse->course->total_item) {
+            $userCourse->progress = $progress;
+            $userCourse->save();
+        }
+
+        return view('user.course.learn', compact(
+            'userCourse',
+            'current_course'
+        ));
+
+    } catch (\Throwable $th) {
+        return view('error.index', ['message' => $th->getMessage()]);
     }
+}
+
 }

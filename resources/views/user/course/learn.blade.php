@@ -1,88 +1,107 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-    <link rel="stylesheet" href="{{ asset('mazer') }}/assets/css/main/app.css" />
-    <link
-      rel="shortcut icon"
-      href="{{ asset('mazer') }}/assets/images/logo/favicon.svg"
-      type="image/x-icon"
-    />
-    <link
-      rel="shortcut icon"
-      href="{{ asset('mazer') }}/assets/images/logo/favicon.png"
-      type="image/png"
-    />
-    
-  </head>
+    <title>Belajar Kursus</title>
 
-  <body>
-    <nav class="navbar navbar-light">
-      <div class="container-fluid d-block">
-        <a href="{{ route('frontend.user.course.index') }}"><i class="bi bi-chevron-left"></i></a>
-        <a class="navbar-brand ms-4" href="{{ route('frontend.user.course.index') }}">
-          <img src="{{ asset('mazer') }}/assets/images/logo/logo.svg" />
+    <link rel="stylesheet" href="{{ asset('mazer/assets/css/main/app.css') }}">
+    <link rel="shortcut icon" href="{{ asset('mazer/assets/images/logo/favicon.svg') }}">
+</head>
+
+<body>
+
+<nav class="navbar navbar-light">
+    <div class="container-fluid d-flex align-items-center">
+        <a href="{{ route('frontend.user.course.index') }}" class="me-3">
+            <i class="bi bi-chevron-left"></i>
         </a>
-      </div>
-    </nav>
+        <a class="navbar-brand" href="{{ route('frontend.user.course.index') }}">
+            <img src="{{ asset('mazer/assets/images/logo/logo.svg') }}" alt="Logo">
+        </a>
+    </div>
+</nav>
 
-    <div class="container-fluid">
-      <div class="row">
+<div class="container-fluid mt-3">
+    <div class="row">
+
+        {{-- VIDEO --}}
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">{{ $data['current_course']['number'] }}.{{ $data['current_course']['name'] }}</h4>
+                    <h4>
+                        {{ $current_course->number }}. {{ $current_course->name }}
+                    </h4>
                 </div>
-                <div class="card-body">
-                    <iframe class="w-100 rounded" height="400"
-                    src="https://www.youtube.com/embed/{{ $data['current_course']['link'] }}">
-                </iframe>
-                </div>
-                <div class="card-footer d-flex justify-content-between">
-                   <div>
-                    @if ($data['current_course']['number'] != 1)
-                   <a href="{{ route('frontend.user.course.learn',[
-                    'id' => $data['userCourse']['id'],
-                    'progress' => $data['current_course']['number'] - 1
-                  ]) }}" class="btn btn-secondary">{{ __('button.previous') }}</a>
-                   @endif
-                   </div>
 
-                   <div>
-                    @if ($data['current_course']['number'] != $data['userCourse']['course']['total_item'])
-                    <a href="{{ route('frontend.user.course.learn',[
-                        'id' => $data['userCourse']['id'],
-                        'progress' => $data ['current_course']['number'] + 1
-                      ]) }}" class="btn btn-primary">{{ __('button.next') }}</a>
-                      @else  
-                      <a href="{{ route('frontend.user.course.index')}}" class="btn btn-primary">{{ __('button.finish') }}</a>
-                      @endif
-                   </div>
+                <div class="card-body">
+                    <iframe
+                        class="w-100 rounded"
+                        height="400"
+                        src="https://www.youtube.com/embed/{{ $current_course->link }}"
+                        allowfullscreen>
+                    </iframe>
                 </div>
-              </div>
+
+                <div class="card-footer d-flex justify-content-between">
+                    <div>
+                        @if ($current_course->number > 1)
+                            <a href="{{ route('user.course.learn', [
+                                $userCourse->id,
+                                $current_course->number - 1
+                            ]) }}" class="btn btn-secondary">
+                                Sebelumnya
+                            </a>
+                        @endif
+                    </div>
+
+                    <div>
+                        @if ($current_course->number < $userCourse->course->total_item)
+                            <a href="{{ route('user.course.learn', [
+                                $userCourse->id,
+                                $current_course->number + 1
+                            ]) }}" class="btn btn-primary">
+                                Selanjutnya
+                            </a>
+                        @else
+                            <a href="{{ route('frontend.user.course.index') }}" class="btn btn-success">
+                                Selesai
+                            </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
+
+        {{-- LIST MATERI --}}
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Materi</h4>
-                  </div>
+                    <h4>Materi</h4>
+                </div>
+
                 <div class="card-body">
-                    @foreach ($data['userCourse']['course']['detail'] as $detail)
-                            <a href="{{ route('frontend.user.course.learn',[
-                                'id' => $data['userCourse']['id'],
-                                'progress' => $detail['number']
-                              ]) }}">
-                            <div class="alert {{ $detail['number'] == $data['current_course']->number ? 'alert-primary' : 'alert-secondary' }}"><i data-feather="video"></i> {{ $detail->number }}.{{ $detail->name }}
+                    @foreach ($userCourse->course->detail as $detail)
+                        <a href="{{ route('user.course.learn', [
+                            $userCourse->id,
+                            $detail->number
+                        ]) }}" class="text-decoration-none">
+
+                            <div class="alert
+                                {{ $detail->number == $current_course->number
+                                    ? 'alert-primary'
+                                    : 'alert-secondary' }}">
+                                {{ $detail->number }}. {{ $detail->name }}
                             </div>
+
                         </a>
                     @endforeach
                 </div>
             </div>
         </div>
-      </div>
+
     </div>
-  </body>
+</div>
+
+</body>
 </html>

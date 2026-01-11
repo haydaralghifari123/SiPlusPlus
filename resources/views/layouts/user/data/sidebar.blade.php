@@ -65,7 +65,7 @@
                 {{-- ================= MITRA ================= --}}
                 @role('mitra')
                     <li class="sidebar-item">
-                        <a href="{{ route('mitra.dashboard') }}" class="sidebar-link">
+                        <a href="{{ route('frontend.mitra.dashboard') }}" class="sidebar-link">
                             <i class="bi bi-briefcase-fill"></i>
                             <span>Dashboard Mitra</span>
                         </a>

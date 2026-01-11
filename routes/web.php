@@ -31,6 +31,7 @@ use App\Http\Controllers\User\UsercourseController;
 // Mitra
 use App\Http\Controllers\Mitra\RegistermitraController;
 use App\Http\Controllers\Mitra\CoursemitraController;
+use App\Http\Controllers\Mitra\MitraDashboardController;
 use App\Http\Controllers\Mitra\TransactionmitraController;
 use App\Http\Controllers\Mitra\WalletController;
 
@@ -228,11 +229,9 @@ Route::post('/mitra/register', [RegistermitraController::class, 'store'])
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:mitra'])->prefix('mitra')->group(function () {
-// dashboard mitra
-Route::middleware(['auth', 'role:mitra'])->prefix('mitra')->group(function () {
+    // dashboard mitra
     Route::get('/dashboard', [MitraDashboardController::class, 'index'])
         ->name('frontend.mitra.dashboard');
-});
 
 // mitra course
 Route::get('/mitra/course', [CoursemitraController::class, 'index'])
