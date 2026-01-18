@@ -87,6 +87,8 @@ Route::prefix('backend')
             Route::prefix('transaction')->name('transaction.')->group(function () {
                 Route::get('/', [FeatureTransactionController::class, 'index'])->name('index');
                 Route::get('/show/{id}', [FeatureTransactionController::class, 'show'])->name('show');
+                Route::get('/export-pdf', [FeatureTransactionController::class, 'exportPdf'])->name('export-pdf');
+                Route::get('/export-pdf-all', [FeatureTransactionController::class, 'exportPdfAll'])->name('export-pdf-all');
             });
 
             Route::prefix('withdraw')->name('withdraw.')->group(function () {
@@ -143,6 +145,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [TransactionController::class, 'index'])->name('index');
             Route::post('/store', [TransactionController::class, 'store'])->name('store');
             Route::get('/invoice/{invoice}', [TransactionController::class, 'invoice'])->name('invoice');
+            Route::get('/export-pdf', [TransactionController::class, 'exportPdf'])->name('export-pdf');
         });
 
         Route::prefix('course')->name('course.')->group(function () {
@@ -183,6 +186,7 @@ Route::middleware(['auth','role:mitra'])
 
         Route::prefix('transaction')->name('transaction.')->group(function () {
             Route::get('/', [TransactionmitraController::class, 'index'])->name('index');
+            Route::get('/export-pdf', [TransactionmitraController::class, 'exportPdf'])->name('export-pdf');
         });
 
         Route::prefix('wallet')->name('wallet.')->group(function () {
@@ -255,6 +259,9 @@ Route::post('/mitra/course/update/{id}', [CoursemitraController::class, 'update'
 // mitra transaction
 Route::get('/mitra/transaction', [TransactionmitraController::class, 'index'])
     ->name('frontend.mitra.transaction.index');
+
+Route::get('/mitra/transaction/export-pdf', [TransactionmitraController::class, 'exportPdf'])
+    ->name('frontend.mitra.transaction.export-pdf');
 
 // mitra wallet
 Route::get('/mitra/wallet', [WalletController::class, 'index'])

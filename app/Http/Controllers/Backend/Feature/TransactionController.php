@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Feature\Transaction;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
+use PDF;
 
 class TransactionController extends Controller
 {
@@ -31,6 +32,39 @@ class TransactionController extends Controller
             $data['transaction'] = $this->transaction->find($id);
             return view('backend.feature.transaction.show',compact('data'));
         }catch (\Throwable $th) {
+            return view('error.index',['message' => $th->getMessage()]);
+        }
+    }
+
+    public function exportPdf()
+    {
+        try {
+            $transactions = $this->transaction->Query()
+                ->with(['course', 'user'])
+                ->where('status', '1')
+                ->orderByDesc('id')
+                ->get();
+
+            $totalTransactions = $transactions->count();
+            $pdf = PDF::loadView('backend.feature.transaction.export-pdf', compact('transactions', 'totalTransactions'));
+            return $pdf->download('admin_successful_transactions_' . now()->format('Y-m-d') . '.pdf');
+        } catch (\Throwable $th) {
+            return view('error.index',['message' => $th->getMessage()]);
+        }
+    }
+
+    public function exportPdfAll()
+    {
+        try {
+            $transactions = $this->transaction->Query()
+                ->with(['course', 'user'])
+                ->orderByDesc('id')
+                ->get();
+
+            $totalTransactions = $transactions->count();
+            $pdf = PDF::loadView('backend.feature.transaction.export-pdf-all', compact('transactions', 'totalTransactions'));
+            return $pdf->download('admin_all_transactions_' . now()->format('Y-m-d') . '.pdf');
+        } catch (\Throwable $th) {
             return view('error.index',['message' => $th->getMessage()]);
         }
     }

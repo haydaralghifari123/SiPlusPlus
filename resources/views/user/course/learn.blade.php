@@ -64,6 +64,9 @@
                                 Selanjutnya
                             </a>
                         @else
+                            <a href="https://flexy-quiz.netlify.app/" class="btn btn-success">
+                                Ambil Kuis
+                            </a>
                             <a href="{{ route('frontend.user.course.index') }}" class="btn btn-success">
                                 Selesai
                             </a>

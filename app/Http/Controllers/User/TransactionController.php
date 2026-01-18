@@ -10,6 +10,7 @@ use App\Repositories\BaseRepository;
 use App\Services\Midtrans\CreateSnapTokenService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use PDF;
 class TransactionController extends Controller
 {
     protected $transaction,$course;
@@ -64,5 +65,17 @@ class TransactionController extends Controller
             return view('error.index',['message' => $th->getMessage()]);
         }
 
+    }
+
+    public function exportPdf()
+    {
+        try {
+            $transactions = $this->transaction->Query()->with(['Course'])->where('user_id', auth()->user()->id)->where('status', '1')->get();
+            $totalTransactions = $transactions->count();
+            $pdf = PDF::loadView('user.transaction.export-pdf', compact('transactions', 'totalTransactions'));
+            return $pdf->download('transactions_' . auth()->user()->name . '_' . now()->format('Y-m-d') . '.pdf');
+        } catch (\Throwable $th) {
+            return view('error.index',['message' => $th->getMessage()]);
+        }
     }
 }

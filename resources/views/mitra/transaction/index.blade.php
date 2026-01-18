@@ -3,6 +3,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <h4 class="card-title">Data {{ __('sidebar.transaction') }}</h4>
+        <a href="{{ route('mitra.transaction.export-pdf') }}" class="btn btn-primary">Export PDF</a>
     </div>
     <div class="card-body">
        <div class="table-responsive">
