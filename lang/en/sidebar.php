@@ -3,7 +3,7 @@
 return [
     'category' => 'Category',
     'user' => 'Users',
-    'mitra'  => 'Partner',
+    'mitra'  => 'Mentor',
     'course' => 'Course',
     'transaction' => 'Transaction',
     'wallet' => 'Wallet',
