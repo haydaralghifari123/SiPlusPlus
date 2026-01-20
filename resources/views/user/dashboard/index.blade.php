@@ -9,7 +9,10 @@
         <div class="col-12">
             <div class="card bg-primary text-white">
                 <div class="card-body">
-                    <h4>Hi, {{ auth()->user()->name }}!</h4>
+                    <h4 class="text-white">
+    Hi, {{ auth()->user()->name }}!
+</h4>
+
                     <p>
                         Lanjutkan pembelajaranmu untuk mencapai tujuanmu!
                         Kamu telah membuat kemajuan yang luar biasa.

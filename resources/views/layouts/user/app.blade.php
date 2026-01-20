@@ -25,12 +25,10 @@
         <div id="main" class='layout-navbar'>
             @include('layouts.user.data.navbar')
             <div id="main-content">
-                <div class="page-heading">
-                    @include('layouts.user.data.breadcrumbs')
-                    <section class="section">
-                        @yield('content')
-                    </section>
-                </div>
+                <section class="section">
+    @yield('content')
+</section>
+
                 @include('layouts.user.data.footer')
             </div>
         </div>

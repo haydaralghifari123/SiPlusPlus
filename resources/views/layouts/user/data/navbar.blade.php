@@ -13,9 +13,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-lg-0">
                     <li class="nav-item dropdown me-3">
-                        <a class="nav-link active dropdown-toggle text-gray-600" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                            <i class='bi bi-bell bi-sub fs-4'></i>
-                        </a>
+                        
                         <ul class="dropdown-menu dropdown-menu-end notification-dropdown" aria-labelledby="dropdownMenuButton">
                             <li class="dropdown-header">
                                 <h6>Notifications</h6>
@@ -53,7 +51,17 @@
                         <div class="user-menu d-flex">
                             <div class="user-name text-end me-3">
                                 <h6 class="mb-0 text-gray-600">{{ auth()->user()->name }}</h6>
-                                <p class="mb-0 text-sm text-gray-600">Administrator</p>
+                                @php
+    $roles = [
+        'admin' => 'Administrator',
+        'user' => 'User',
+        'mentor' => 'Mentor',
+    ];
+@endphp
+
+<p class="mb-0 text-sm text-gray-600">
+    {{ $roles[auth()->user()->role] ?? 'User' }}
+</p>
                             </div>
                             <div class="user-img d-flex align-items-center">
                                 <div class="avatar avatar-md">

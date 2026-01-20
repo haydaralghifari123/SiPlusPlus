@@ -1,6 +1,13 @@
 @extends('layouts.auth')
 
 @section('content')
+<style>
+/* Disable browser built-in password reveal (Edge / IE) */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+</style>
 
 <div class="min-h-screen flex bg-white">
 
@@ -20,13 +27,11 @@
         </p>
     </div>
 
-    {{-- RIGHT SIDE (WHITE BACKGROUND) --}}
+    {{-- RIGHT SIDE --}}
     <div class="w-full lg:w-1/2 bg-white flex items-center justify-center">
 
-        {{-- FLOATING LOGIN CARD --}}
         <div class="w-full max-w-lg bg-white shadow-[0_30px_60px_rgba(0,0,0,0.25)] px-10 py-14 rounded-sm">
 
-            {{-- TITLE --}}
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-1">
                 LOGIN
             </h2>
@@ -34,10 +39,8 @@
                 LOG IN TO CONTINUE
             </p>
 
-            {{-- DIVIDER --}}
             <div class="w-full h-px bg-gray-300 my-8"></div>
 
-            {{-- LOGIN FORM --}}
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
@@ -64,15 +67,19 @@
                     </label>
                     <div class="flex items-center border border-gray-300 px-4 py-3">
                         <i class="bi bi-lock text-gray-500 mr-3"></i>
+
                         <input
                             type="password"
+                            id="password"
                             name="password"
                             class="w-full outline-none text-gray-700 bg-transparent"
                             placeholder="********"
                         >
-                        <span class="text-xs text-gray-400 ml-2 cursor-pointer">
-                            SHOW
-                        </span>
+
+                        <i
+                            id="togglePassword"
+                            class="bi bi-eye text-gray-400 ml-2 cursor-pointer"
+                        ></i>
                     </div>
                 </div>
 
@@ -87,7 +94,6 @@
                 </button>
             </form>
 
-            {{-- FOOTER --}}
             <div class="text-center mt-10">
                 <a href="{{ route('register') }}"
                    class="text-gray-500 text-sm hover:underline">
@@ -99,5 +105,22 @@
     </div>
 
 </div>
+
+{{-- TOGGLE PASSWORD SCRIPT --}}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', function () {
+        const isPassword = passwordInput.type === 'password';
+
+        passwordInput.type = isPassword ? 'text' : 'password';
+
+        this.classList.toggle('bi-eye');
+        this.classList.toggle('bi-eye-slash');
+    });
+});
+</script>
 
 @endsection

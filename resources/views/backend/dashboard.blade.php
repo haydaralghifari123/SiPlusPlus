@@ -5,21 +5,21 @@
 <style>
     .dashboard-card {
         background: #0F1A44;
-        color: white;
         padding: 25px;
         border-radius: 10px;
         text-align: center;
-        font-weight: 600;
     }
 
     .dashboard-card h2 {
         font-size: 45px;
         font-weight: 700;
         margin: 0;
+        color: #ffffff !important;   /* 🔥 FIX UTAMA */
     }
 
     .dashboard-card span {
         font-size: 18px;
+        color: #ffffff !important;   /* 🔥 FIX */
         opacity: 0.9;
     }
 
@@ -31,6 +31,7 @@
         margin-bottom: 30px;
     }
 </style>
+
 
 <div class="container-fluid">
 

@@ -81,16 +81,11 @@
                     <li class="sidebar-item">
                         <a href="{{ route('mitra.transaction.index') }}" class="sidebar-link">
                             <i class="bi bi-receipt"></i>
-                            <span>Transaksi</span>
+                            <span>Penghasilan</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
-                        <a href="{{ route('mitra.wallet.index') }}" class="sidebar-link">
-                            <i class="bi bi-wallet2"></i>
-                            <span>Wallet</span>
-                        </a>
-                    </li>
+                    
                 @endrole
 
                 {{-- LOGOUT --}}
