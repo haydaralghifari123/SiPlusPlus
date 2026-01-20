@@ -1,11 +1,42 @@
 <?php
 
 return [
-    'category' => 'Kategori',
-    'user' => 'Pengguna',
-    'mitra'  => 'Mitra',
-    'course' => 'Kursus',
-    'transaction' => 'Transaksi',
-    'wallet' => 'Dompet',
-    'witdrawal' => 'Penarikan',
+
+    /*
+    |--------------------------------------------------------------------------
+    | General
+    |--------------------------------------------------------------------------
+    */
+    'dashboard' => 'Dashboard',
+    'logout'    => 'Logout',
+
+    /*
+    |--------------------------------------------------------------------------
+    | User
+    |--------------------------------------------------------------------------
+    */
+    'user_dashboard'   => 'Dashboard',
+    'course_my'        => 'Kursus Saya',
+    'grade'            => 'Nilai',
+    'certificate'      => 'Sertifikat',
+    'transaction'      => 'Transaksi',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Mitra
+    |--------------------------------------------------------------------------
+    */
+    'mitra_dashboard'  => 'Dashboard Mitra',
+    'earning'          => 'Penghasilan',
+    'course'           => 'Kursus',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin
+    |--------------------------------------------------------------------------
+    */
+    'admin_dashboard'  => 'Dashboard',
+    'master'           => 'Master',
+    'feature'          => 'Feature',
+
 ];
