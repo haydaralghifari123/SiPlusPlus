@@ -47,7 +47,7 @@ input[type="password"]::-ms-clear {
                 {{-- USERNAME --}}
                 <div class="mb-8">
                     <label class="block text-sm font-medium mb-2 text-gray-700">
-                        Username
+                        Email
                     </label>
                     <div class="flex items-center border border-gray-300 px-4 py-3">
                         <i class="bi bi-envelope text-gray-500 mr-3"></i>
