@@ -27,7 +27,7 @@
                     <li class="sidebar-item">
                         <a href="{{ route('frontend.user.dashboard') }}" class="sidebar-link">
                             <i class="bi bi-grid-fill"></i>
-                            <span>Dashboard</span>
+                            <span>Dashboard Member</span>
                         </a>
                     </li>
 
@@ -67,7 +67,7 @@
                     <li class="sidebar-item">
                         <a href="{{ route('frontend.mitra.dashboard') }}" class="sidebar-link">
                             <i class="bi bi-briefcase-fill"></i>
-                            <span>Dashboard Mitra</span>
+                            <span>Dashboard Mentor</span>
                         </a>
                     </li>
 
